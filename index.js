@@ -4,6 +4,7 @@ var $dateInput = document.querySelector("#date");
 var $cityInput = document.querySelector("#city");
 var $stateInput = document.querySelector("#state");
 var $countryInput = document.querySelector("#country");
+var $shapeInput = document.querySelector("#shape");
 var $searchBtn = document.querySelector("#search");
 var $clearBtn = document.querySelector("#clear");
 
@@ -17,7 +18,8 @@ var sightings = dataSet;
 // renderTable renders the filteredAddresses to the tbody
 function renderTable() {
   $tbody.innerHTML = "";
-  for (var i = 0; i < sightings.length; i++) {
+  // sightings.length
+  for (var i = 0; i < 50; i++) {
     // Get get the current object and its fields
     var sighting = sightings[i];
     var fields = Object.keys(sighting);
@@ -38,6 +40,7 @@ function handleSearchButtonClick() {
   var filterStateValue = $stateInput.value.trim().toLowerCase();
   var filterCityValue = $cityInput.value.trim().toLowerCase();
   var filterCountryValue = $countryInput.value.trim().toLowerCase();
+  var filterShapeValue = $shapeInput.value.trim().toLowerCase();
 
   // Set filteredAddresses to an array of all addresses whose "state" matches the filter
   sightings = dataSet.filter(function(sighting) {
@@ -45,7 +48,9 @@ function handleSearchButtonClick() {
     var sightingState = sighting.state.toLowerCase();
     var sightingCity = sighting.city.toLowerCase();
     var sightingCountry = sighting.country.toLowerCase();
+    var sightingShape = sighting.shape.toLowerCase();
 
+    // If the input value is blank or empty, then make the filter match the element to avoid exlcuding it
     if (filterDateValue == '') {
       filterDate = sighting.datetime;
     }
@@ -74,8 +79,15 @@ function handleSearchButtonClick() {
       filterCountry = filterCountryValue;
     }
 
+    if (filterShapeValue == '') {
+      filterShape = sighting.shape;
+    }
+    else{
+      filterShape = filterShapeValue;
+    }
+
     // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
-    return (sightingDate === filterDate && sightingState === filterState && sightingCity === filterCity && sightingCountry === filterCountry);
+    return (sightingDate === filterDate && sightingState === filterState && sightingCity === filterCity && sightingCountry === filterCountry && sightingShape === filterShape);
   });
   renderTable();
 }
