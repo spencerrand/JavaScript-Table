@@ -19,7 +19,7 @@ var sightings = dataSet;
 function renderTable() {
   $tbody.innerHTML = "";
   // sightings.length
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < sightings.length; i++) {
     // Get get the current object and its fields
     var sighting = sightings[i];
     var fields = Object.keys(sighting);
