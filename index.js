@@ -3,8 +3,8 @@ var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#date");
 var $cityInput = document.querySelector("#city");
 var $stateInput = document.querySelector("#state");
-var $countryInput = document.querySelector("#country");
-var $shapeInput = document.querySelector("#shape");
+var $countrySelect = document.querySelector("#country");
+var $shapeSelect = document.querySelector("#shape");
 var $searchBtn = document.querySelector("#search");
 var $clearBtn = document.querySelector("#clear");
 
@@ -19,7 +19,7 @@ var sightings = dataSet;
 function renderTable() {
   $tbody.innerHTML = "";
   // sightings.length
-  for (var i = 0; i < sightings.length; i++) {
+  for (var i = 0; i < 50; i++) {
     // Get get the current object and its fields
     var sighting = sightings[i];
     var fields = Object.keys(sighting);
@@ -38,9 +38,9 @@ function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace
   var filterDateValue = $dateInput.value;
   var filterStateValue = $stateInput.value.trim().toLowerCase();
+  var filterCountryValue = $countrySelect.value;
   var filterCityValue = $cityInput.value.trim().toLowerCase();
-  var filterCountryValue = $countryInput.value.trim().toLowerCase();
-  var filterShapeValue = $shapeInput.value.trim().toLowerCase();
+  var filterShapeValue = $shapeSelect.value.trim().toLowerCase();
 
   // Set filteredAddresses to an array of all addresses whose "state" matches the filter
   sightings = dataSet.filter(function(sighting) {
@@ -97,10 +97,24 @@ function handleClearButtonClick() {
   $dateInput.value = "";
   $cityInput.value = "";
   $stateInput.value = "";
-  $countryInput.value = "";
+  $countrySelect.value = "(Country)";
+  $shapeSelect.value = "(Shape)";
   renderTable();
 }
 
 // Render the table for the first time on page load
 renderTable();
 
+var myList = dataSet;
+var countries = [];
+var shapes = [];
+for (var i = 0; i < myList.length; i++) {  
+  countries.push(myList[i].country);
+  shapes.push(myList[i].shape);
+}
+
+Array.prototype.unique = function() {
+  return this.filter(function (value, index, self) { 
+    return self.indexOf(value) === index;
+  });
+}
