@@ -1,4 +1,4 @@
-// Get references to the tbody element
+// Get references to the body, inputs and buttons
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#date");
 var $cityInput = document.querySelector("#city");
@@ -11,38 +11,41 @@ var $clearBtn = document.querySelector("#clear");
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
 
+// Add an event listener to the clearButton, call handleClearButtonClick when clicked
 $clearBtn.addEventListener("click", handleClearButtonClick);
 
+// Assign a variable to the full dataset
 var sightings = dataSet;
 
-// renderTable renders the filteredAddresses to the tbody
+// renderTable loops through the dataset and adds each row to the tbody
 function renderTable() {
   $tbody.innerHTML = "";
   // sightings.length
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < sightings.length; i++) {
     // Get get the current object and its fields
     var sighting = sightings[i];
     var fields = Object.keys(sighting);
-    // Create a new row in the tbody, set the index to be i + startingIndex
+    // Create a new row in the tbody
     var $row = $tbody.insertRow(i);
     for (var j = 0; j < fields.length; j++) {
-      // For every field in the address object, create a new cell at set its inner text to be the current value at the current address's field
+      // For every field in the address object, create a new cell
       var field = fields[j];
       var $cell = $row.insertCell(j);
+      // Set the cell's text to be each sighting's field
       $cell.innerText = sighting[field];
     }
   }
 }
 
 function handleSearchButtonClick() {
-  // Format the user's search by removing leading and trailing whitespace
+  // Assign variables to each input value
   var filterDateValue = $dateInput.value;
   var filterStateValue = $stateInput.value.trim().toLowerCase();
   var filterCountryValue = $countrySelect.value;
   var filterCityValue = $cityInput.value.trim().toLowerCase();
   var filterShapeValue = $shapeSelect.value.trim().toLowerCase();
 
-  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
+  // Filter the dataset
   sightings = dataSet.filter(function(sighting) {
     var sightingDate = sighting.datetime;
     var sightingState = sighting.state.toLowerCase();
@@ -86,12 +89,13 @@ function handleSearchButtonClick() {
       filterShape = filterShapeValue;
     }
 
-    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+    // Return that row if it's a match
     return (sightingDate === filterDate && sightingState === filterState && sightingCity === filterCity && sightingCountry === filterCountry && sightingShape === filterShape);
   });
   renderTable();
 }
 
+// Reset all input values to blank
 function handleClearButtonClick() {
   sightings = dataSet;
   $dateInput.value = "";
@@ -105,16 +109,17 @@ function handleClearButtonClick() {
 // Render the table for the first time on page load
 renderTable();
 
-var myList = dataSet;
-var countries = [];
-var shapes = [];
-for (var i = 0; i < myList.length; i++) {  
-  countries.push(myList[i].country);
-  shapes.push(myList[i].shape);
-}
+// Code to get unique values in dataset
+// var myList = dataSet;
+// var countries = [];
+// var shapes = [];
+// for (var i = 0; i < myList.length; i++) {  
+//   countries.push(myList[i].country);
+//   shapes.push(myList[i].shape);
+// }
 
-Array.prototype.unique = function() {
-  return this.filter(function (value, index, self) { 
-    return self.indexOf(value) === index;
-  });
-}
+// Array.prototype.unique = function() {
+//   return this.filter(function (value, index, self) { 
+//     return self.indexOf(value) === index;
+//   });
+// }

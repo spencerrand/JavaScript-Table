@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>UFO Sightings</title>
-
   <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -25,9 +24,11 @@
     <div class="row">
       <div class="col-xs-2 col-md-3">
         <div class="panel panel-default">
+
           <div class="panel-heading">
             <h3 class="panel-title">Search</h3>
           </div>
+
           <div class="panel-body">
             <div class="form-group">
               <input type="text" class="form-control" id="date" placeholder="Date (M/D/YYYY)">
@@ -71,21 +72,22 @@
                 <option value="unknown">Unknown</option>
               </select>
               <br><br>
-              <a id="search" class="btn btn-success">Search</a>
-            </div>
-            <a id="clear" class="btn btn-success">Clear</a>
+              <a style = "padding: 8px" id="search" class="btn btn-success">Search</a>
+              &nbsp;
+              <a style = "padding: 8px" id="clear" class="btn btn-success">Clear</a>
+            </div> <!-- Form -->
+          </div> <!-- Panel Body -->
 
-            
-
-          </div>
-        </div>
+        </div> <!-- Panel -->
       </div> <!-- Grid -->
         
       <div class="col-xs-6 col-md-9">
         <div class="panel panel-default">
+
           <div class="panel-heading">
             <h3 class="panel-title">UFO Sightings</h3>
           </div>
+
           <div class="panel-body">
             <table class="table table-striped">
               <thead>
@@ -102,7 +104,7 @@
               <tbody>
               </tbody>
             </table>
-          </div>
+          </div> <!-- Panel Body -->
         </div> <!-- Panel -->
       </div> <!-- Grid -->     
     </div> <!-- Row -->
